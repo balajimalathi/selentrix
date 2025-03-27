@@ -4,9 +4,9 @@ import { openai } from "@ai-sdk/openai";
 import {
   cosineSimilarity,
   embed,
-  Experimental_LanguageModelV1Middleware,
   generateObject,
   generateText,
+  LanguageModelV1Middleware,
 } from "ai";
 import { z } from "zod";
 
@@ -17,7 +17,7 @@ const selectionSchema = z.object({
   }),
 });
 
-export const ragMiddleware: Experimental_LanguageModelV1Middleware = {
+export const ragMiddleware: LanguageModelV1Middleware = {
   transformParams: async ({ params }) => {
     const session = await auth();
 
