@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     "https://ai-sdk-preview-internal-knowledge-base.vercel.app",
   ),
-  title: "Internal Knowledge Base",
+  title: "MarketBase",
   description:
     "Internal Knowledge Base using Retrieval Augmented Generation and Middleware",
 };
