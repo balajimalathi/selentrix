@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { BotIcon, UserIcon } from "./icons";
 import { ReactNode } from "react";
 import { Markdown } from "./markdown";
+import CopyButton from "./copy-button";
 
 export const Message = ({
   role,
@@ -25,6 +26,7 @@ export const Message = ({
       <div className="flex flex-col gap-6 w-full">
         <div className="text-zinc-800 dark:text-zinc-300 flex flex-col gap-4">
           <Markdown>{content as string}</Markdown>
+          {role === "user" ? <></> : <CopyButton content={content as string} />}
         </div>
       </div>
     </motion.div>
