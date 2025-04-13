@@ -1,9 +1,8 @@
-// import { openai } from "@ai-sdk/openai";
-import { deepseek } from "@ai-sdk/deepseek";
+import { openai } from "@ai-sdk/openai";
 import { wrapLanguageModel } from 'ai';
 import { ragMiddleware } from "./rag-middleware";
 
 export const customModel = wrapLanguageModel({
-  model: deepseek("gpt-4o"),
+  model: openai("gpt-4o"),
   middleware: ragMiddleware,
 });

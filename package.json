@@ -1,12 +1,22 @@
 {
-  "name": "ai-sdk-preview-internal-knowledge-base",
+  "name": "selentrix",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --turbo",
+    "build": "tsx lib/db/migrate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint && biome lint --write --unsafe",
+    "lint:fix": "next lint --fix && biome lint --write --unsafe",
+    "format": "biome format --write",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "npx tsx lib/db/migrate.ts",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "db:pull": "drizzle-kit pull",
+    "db:check": "drizzle-kit check",
+    "db:up": "drizzle-kit up",
+    "test": "export PLAYWRIGHT=True && pnpm exec playwright test --workers=4"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.2",
