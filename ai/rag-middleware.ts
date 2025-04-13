@@ -1,6 +1,7 @@
 import { auth } from "@/app/(auth)/auth";
 import { getChunksByFilePaths } from "@/app/db";
-import { openai } from "@ai-sdk/openai";
+import { deepseek } from "@ai-sdk/deepseek";
+import { ollama } from 'ollama-ai-provider';
 import {
   cosineSimilarity,
   embed,
@@ -50,7 +51,7 @@ export const ragMiddleware: LanguageModelV1Middleware = {
     // Classify the user prompt as whether it requires more context or not
     const { object: classification } = await generateObject({
       // fast model for classification:
-      model: openai("gpt-4o-mini", { structuredOutputs: true }),
+      model: deepseek("deepseek-chat", {}),
       output: "enum",
       enum: ["question", "statement", "other"],
       system: "classify the user message as a question, statement, or other",
@@ -66,14 +67,14 @@ export const ragMiddleware: LanguageModelV1Middleware = {
     // Use hypothetical document embeddings:
     const { text: hypotheticalAnswer } = await generateText({
       // fast model for generating hypothetical answer:
-      model: openai("gpt-4o-mini", { structuredOutputs: true }),
+      model: deepseek("deepseek-chat", {}),
       system: "Answer the users question:",
       prompt: lastUserMessageContent,
     });
 
-    // Embed the hypothetical answer
+    // // Embed the hypothetical answer
     const { embedding: hypotheticalAnswerEmbedding } = await embed({
-      model: openai.embedding("text-embedding-3-small"),
+      model: ollama.embedding("mxbai-embed-large"),
       value: hypotheticalAnswer,
     });
 
